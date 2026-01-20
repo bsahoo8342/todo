@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beautiful, feature-rich todo list application to manage your tasks efficiently">
+    <title>TaskFlow - Modern Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">✓</div>
+                    <h1 class="app-title">TaskFlow</h1>
+                </div>
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalTasks">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="completedTasks">0</span>
+                        <span class="stat-label">Done</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="pendingTasks">0</span>
+                        <span class="stat-label">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Add Task Form -->
+            <section class="add-task-section">
+                <div class="form-card">
+                    <h2 class="section-title">
+                        <span class="title-icon">+</span>
+                        Create New Task
+                    </h2>
+                    <form id="taskForm" class="task-form">
+                        <div class="form-group">
+                            <label for="taskTitle" class="form-label">Title <span class="required">*</span></label>
+                            <input type="text" id="taskTitle" class="form-input" placeholder="Enter task title..."
+                                required autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskDescription" class="form-label">Description <span
+                                    class="required">*</span></label>
+                            <textarea id="taskDescription" class="form-textarea" placeholder="Enter task description..."
+                                rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskTime" class="form-label">Set Time <span
+                                    class="optional">(optional)</span></label>
+                            <input type="datetime-local" id="taskTime" class="form-input">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span class="btn-icon">+</span>
+                                <span id="btnText">Add Task</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Sync Section -->
+            <section class="sync-section">
+                <div class="sync-card">
+                    <div class="sync-header">
+                        <h3 class="sync-title">
+                            <span class="sync-icon">📁</span>
+                            Synchronization & Backup
+                        </h3>
+                        <p class="sync-description">Save or load your tasks from a JSON file</p>
+                    </div>
+                    <div class="sync-actions">
+                        <button onclick="window.saveToFile()" class="btn btn-sync"
+                            title="Save tasks to a JSON file (Ctrl+S)">
+                            <span class="btn-icon">💾</span>
+                            Save to File
+                        </button>
+                        <button onclick="window.loadFromFile()" class="btn btn-sync"
+                            title="Load tasks from a JSON file (Ctrl+O)">
+                            <span class="btn-icon">📂</span>
+                            Load from File
+                        </button>
+                    </div>
+                    <div class="sync-info">
+                        <span class="sync-status">
+                            <span class="status-indicator"></span>
+                            <span class="status-text">Cross-tab sync active</span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Tasks</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search tasks..."
+                        autocomplete="off">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <div id="tasksList" class="tasks-list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3 class="empty-title">No tasks yet</h3>
+                    <p class="empty-text">Create your first task to get started!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 TaskFlow.</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
